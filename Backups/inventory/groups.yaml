@@ -1,0 +1,11 @@
+---
+cisco_group:
+  platform: 'ios'
+
+switches:
+  groups:
+    -  cisco_group
+
+routers:
+  groups:
+    -  cisco_group

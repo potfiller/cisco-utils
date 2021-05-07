@@ -1,0 +1,30 @@
+---
+ASW1:
+  hostname: 192.168.64.11
+  groups:
+    - switches
+
+ASW2:
+  hostname: 192.168.64.12
+  groups:
+    - switches
+
+R1:
+  hostname: 192.168.64.31
+  groups:
+    - routers
+
+R3:
+  hostname: 192.168.64.33
+  data: 
+    mac_address: 00:23:eb:55:14:89
+  groups:
+    - routers
+  
+R4:
+  hostname: 192.168.64.34
+  data: 
+    mac_address: 00:22:90:35:95:05
+  groups:
+    - routers
+  
