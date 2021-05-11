@@ -7,7 +7,6 @@ from nornir.core.task import Task, Result
 from nornir_napalm.plugins.tasks import napalm_get
 from nornir_utils.plugins.functions import print_result
 import yaml
-from classes.Appliance import Appliance
 
 username = ""
 password = ""
