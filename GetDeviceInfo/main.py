@@ -47,8 +47,9 @@ def nornir_code():
     content = ""
     
     for host in result.keys():
-        device = result[host][0].result['get_facts']
-        content += f"{device['hostname']}\t{device['model']}\t{device['os_version']}\t{device['serial_number']}\n"
+        if not host in result.failed_hosts.keys():
+            device = result[host][0].result['get_facts']
+            content += f"{device['hostname']}\t{device['model']}\t{device['os_version']}\t{device['serial_number']}\n"
     
     write_file(content)
 

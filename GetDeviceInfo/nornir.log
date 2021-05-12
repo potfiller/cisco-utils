@@ -1,0 +1,688 @@
+2021-05-12 16:58:45,277 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['get_facts']} on 5 hosts
+2021-05-12 16:58:50,305 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.31:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.31
+
+2021-05-12 16:58:50,305 - nornir.core.task -    ERROR -      start() - Host 'R3': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.33:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.33
+
+2021-05-12 16:58:50,305 - nornir.core.task -    ERROR -      start() - Host 'R4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.34:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.34
+
+2021-05-12 17:01:10,386 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['get_facts']} on 5 hosts
+2021-05-12 17:01:15,407 - nornir.core.task -    ERROR -      start() - Host 'R3': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.33:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.33
+
+2021-05-12 17:01:15,415 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.31:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.31
+
+2021-05-12 17:01:15,416 - nornir.core.task -    ERROR -      start() - Host 'R4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.34:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.34
+
+2021-05-12 17:03:08,442 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['get_facts']} on 5 hosts
+2021-05-12 17:03:13,465 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.31:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.31
+
+2021-05-12 17:03:13,475 - nornir.core.task -    ERROR -      start() - Host 'R3': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.33:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.33
+
+2021-05-12 17:03:13,476 - nornir.core.task -    ERROR -      start() - Host 'R4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.34:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.34
+
+2021-05-12 17:04:16,078 -  nornir.core -     INFO -        run() - Running task 'napalm_get' with args {'getters': ['get_facts']} on 5 hosts
+2021-05-12 17:04:21,113 - nornir.core.task -    ERROR -      start() - Host 'R3': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.33:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.33
+
+2021-05-12 17:04:21,113 - nornir.core.task -    ERROR -      start() - Host 'R4': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.34:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.34
+
+2021-05-12 17:04:21,114 - nornir.core.task -    ERROR -      start() - Host 'R1': task 'napalm_get' failed with traceback:
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 935, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\util.py", line 283, in retry_on_signal
+    return function()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\paramiko\client.py", line 349, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 86, in _netmiko_open
+    self._netmiko_device = ConnectHandler(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\ssh_dispatcher.py", line 326, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\cisco\cisco_ios.py", line 17, in __init__
+    return super().__init__(*args, **kwargs)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 350, in __init__
+    self._open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 355, in _open
+    self.establish_connection()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\netmiko\base_connection.py", line 957, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.ssh_exception.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: cisco_ios 192.168.64.31:22
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\task.py", line 99, in start
+    r = self.task(self, **self.params)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\tasks\napalm_get.py", line 32, in napalm_get
+    device = task.host.get_connection(CONNECTION_NAME, task.nornir.config)
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 494, in get_connection
+    self.open_connection(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir\core\inventory.py", line 546, in open_connection
+    conn_obj.open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\nornir_napalm\plugins\connections\__init__.py", line 57, in open
+    connection.open()
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\ios\ios.py", line 169, in open
+    self.device = self._netmiko_open(
+  File "C:\Users\Ben\AppData\Local\Programs\Python\Python39\lib\site-packages\napalm\base\base.py", line 95, in _netmiko_open
+    raise ConnectionException("Cannot connect to {}".format(self.hostname))
+napalm.base.exceptions.ConnectionException: Cannot connect to 192.168.64.31
+
