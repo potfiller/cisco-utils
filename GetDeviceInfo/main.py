@@ -1,69 +1,128 @@
-# use Nornir inventory
-# and napalm_get
-# to record device hostname, firmware version
+"""This module collects information from network devices
+using nornir and napalm
+"""
 
-from nornir import InitNornir
-from nornir.core.task import Task, Result
-from nornir_napalm.plugins.tasks import napalm_get
-import yaml
 import os
 from datetime import datetime
+from nornir import InitNornir
+from nornir_napalm.plugins.tasks import napalm_get
+import yaml
+from prettytable import PrettyTable
+from classes.device import Device
+from classes.interface import Interface, IntType
 
-username = ""
-password = ""
-reportdir = "reports\\"
+REPORTDIR = "reports\\"
 
 def write_file(filecontent: str):
     """Write the obtained information to a file
-    
+
     Fields in the file are tab-separated
     File suffix is txt.
     """
-    
+
     #create reports folder
-    if not os.path.exists(reportdir):
-        os.mkdir(reportdir)
-    
+    if not os.path.exists(REPORTDIR):
+        os.mkdir(REPORTDIR)
+
     #prepare filename
     datestr = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
     filename = f"inventory_{datestr}.txt"
 
     #write file
-    with open(os.path.join(reportdir, filename), "w") as f:
-        f.write(filecontent)
+    with open(os.path.join(REPORTDIR, filename), "w") as file_to_write:
+        file_to_write.write(filecontent)
 
-def nornir_code():
+
+def create_device_table(devices: list) -> PrettyTable:
+    """Create a PrettyTable from the list of devices"""
+
+    table = PrettyTable()
+    table.field_names = ['hostname','model','os_version']
+    for device in devices:
+        table.add_row([device.hostname, device.model, device.os_version])
+    return table
+
+
+def create_interface_table(device_name: str, interfaces: list) -> PrettyTable:
+    """Create a PrettyTable from the list of device interfaces"""
+
+    table = PrettyTable()
+    table.field_names = [device_name]
+    for interface in interfaces:
+        table.add_row([interface.name])
+    return table
+
+
+def create_model(result) -> list:
+    """Create a model from the nornir results"""
+
+    devices = []
+    for host in result.keys():
+        if not host in result.failed_hosts.keys():
+            device = Device(
+                hostname = result[host][0].result['get_facts']['hostname'],
+                model = result[host][0].result['get_facts']['model'],
+                os_version = result[host][0].result['get_facts']['os_version'],
+                interfaces = []
+            )
+            for int_name in result[host][0].result['get_facts']['interface_list']:
+                device.interfaces.append(
+                    Interface(
+                        name = int_name,
+                        l2_addr = "",
+                        l3_addr = "",
+                        int_type = IntType.ACCESS,
+                        enabled = False
+                    )
+                )
+            devices.append(device)
+    return devices
+
+
+def nornir_code(creds: dict):
+    """Execute the nornir tasks and process results"""
+
     #update and filter inventory
-    nr = InitNornir(config_file="config.yaml")
-    nr.inventory.groups["cisco_group"].username = username
-    nr.inventory.groups["cisco_group"].password = password
+    nornir_obj = InitNornir(config_file="config.yaml")
+    nornir_obj.inventory.groups["cisco_group"].username = creds['username']
+    nornir_obj.inventory.groups["cisco_group"].password = creds['password']
 
     #start main task
-    result = nr.run(
+    result = nornir_obj.run(
         task=napalm_get,
         getters=["get_facts"]
     )
 
-    content = ""
-    
-    for host in result.keys():
-        if not host in result.failed_hosts.keys():
-            device = result[host][0].result['get_facts']
-            content += f"{device['hostname']}\t{device['model']}\t{device['os_version']}\t{device['serial_number']}\n"
-    
-    write_file(content)
+    devices = create_model(result)
+    device_content = ""
+    device_table = create_device_table(devices)
+    print(device_table)
 
-def setup_creds():
-    global username, password
+    for device in devices:
+        device_content += f"{device.hostname}\t{device.model}\t{device.os_version}\n"
+        int_table = create_interface_table(device.hostname, device.interfaces)
+        print(int_table)
+
+    write_file(device_content)
+
+
+def setup_creds() -> dict:
+    """retrieve credentials"""
+
     #get credentials
     creds = yaml.safe_load(open('C:\\Users\\Ben\\python\\creds.yaml'))
-    username = creds['user']['username']
-    password = creds['user']['password']
+
+    return {
+        'username': creds['user']['username'],
+        'password': creds['user']['password']
+    }
 
 def main():
-    setup_creds()
-    nornir_code()
+    """app entry point"""
+
+    creds = setup_creds()
+    nornir_code(creds)
+
 
 if __name__ == "__main__":
     main()
-
