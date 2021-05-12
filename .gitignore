@@ -1,3 +1,4 @@
 reports
 .vscode
 nornir.log
+__pycache__
