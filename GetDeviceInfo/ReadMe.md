@@ -15,3 +15,4 @@ This information is then built into a model (Device and Interface classes) and p
 * [Nornir Plugins](https://github.com/nornir-automation/nornir_napalm)
 * [Napalm](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix)
 * [ntc_templates](https://github.com/networktocode/ntc-templates)
+* [PrettyTable](https://pypi.org/project/prettytable/)
