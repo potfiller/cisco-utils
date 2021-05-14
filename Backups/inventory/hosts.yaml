@@ -9,22 +9,32 @@ ASW2:
   groups:
     - switches
 
+CSW1:
+  hostname: 192.168.64.21
+  groups:
+    - switches
+
+CSW2:
+  hostname: 192.168.64.22
+  groups:
+    - switches
+
 R1:
   hostname: 192.168.64.31
   groups:
     - routers
 
+R2:
+  hostname: 192.168.64.32
+  groups:
+    - routers
+
 R3:
   hostname: 192.168.64.33
-  data: 
-    mac_address: 00:23:eb:55:14:89
   groups:
     - routers
   
 R4:
   hostname: 192.168.64.34
-  data: 
-    mac_address: 00:22:90:35:95:05
   groups:
     - routers
-  

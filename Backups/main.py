@@ -1,21 +1,21 @@
-# use Nornir inventory
-# and napalm_get
-# to backup device running configs
+""""use Nornir inventory
+and napalm_get to backup devices' running configs
+"""
+
+import os
+from datetime import datetime
 
 from nornir import InitNornir
 from nornir.core.task import Task, Result
 from nornir_napalm.plugins.tasks import napalm_get
-from nornir_utils.plugins.functions import print_result
 import yaml
-import os
-from datetime import datetime
 
-username = ""
-password = ""
-backupdir = "backups\\"
+BACKUPDIR = "backups\\"
+
 
 def do_backups(task: Task) -> Result:
-    #use napalm to retrieve mac address table
+    """Runs the napalm tasks"""
+
     task.run(
         task=napalm_get,
         getters=["config"]
@@ -25,37 +25,49 @@ def do_backups(task: Task) -> Result:
         result=f"{task.host} done."
     )
 
-def run_code():
-    #create backup folder
-    if not os.path.exists(backupdir):
-        os.mkdir(backupdir)
 
-    #get credentials
+def setup_creds() -> dict:
+    """retrieve credentials"""
+
+    # get credentials
     creds = yaml.safe_load(open('C:\\Users\\Ben\\python\\creds.yaml'))
-    username = creds['user']['username']
-    password = creds['user']['password']
 
-    #update and filter inventory
-    nr = InitNornir(config_file="config.yaml")
-    nr.inventory.groups["cisco_group"].username = username
-    nr.inventory.groups["cisco_group"].password = password
+    return {
+        'username': creds['user']['username'],
+        'password': creds['user']['password']
+    }
 
-    #start main task
-    result = nr.run(
+
+def main():
+    """Main function"""
+
+    # ensure there is a directory for the backup files
+    if not os.path.exists(BACKUPDIR):
+        os.mkdir(BACKUPDIR)
+
+    # prepare a timetime string for the filenames
+    datestr = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # get the login credentials
+    creds = setup_creds()
+
+    # update and filter inventory
+    nornir_obj = InitNornir(config_file="config.yaml")
+    nornir_obj.inventory.groups["cisco_group"].username = creds['username']
+    nornir_obj.inventory.groups["cisco_group"].password = creds['password']
+
+    # start main task
+    result = nornir_obj.run(
         task=do_backups
     )
 
-    datestr = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-    
-    for host in result.keys():
-        filename = f"{host}_{datestr}.cfg"
-        config = result[host][1].result['config']['startup']
-        with open(os.path.join(backupdir, filename), "w") as f:
-            f.write(config)        
+    if len(result.keys()) > len(result.failed_hosts.keys()):
+        for host in result.keys():
+            filename = f"{host}_{datestr}.cfg"
+            config = result[host][1].result['config']['startup']
+            with open(os.path.join(BACKUPDIR, filename), "w") as backup_file:
+                backup_file.write(config)
 
-def main():
-    run_code()
 
 if __name__ == "__main__":
     main()
-
