@@ -1,64 +1,63 @@
-# use Nornir inventory
-# and napalm_get
-# to find where a device is connected
+"""use Nornir inventory and napalm_get
+to find where a device is connected
+"""
 
 from nornir import InitNornir
 from nornir.core.task import Task, Result
 from nornir_napalm.plugins.tasks import napalm_get
-from nornir_utils.plugins.functions import print_result
 import yaml
 
-username = ""
-password = ""
 
-def mytask(task: Task) -> Result:
+def get_address_info(task: Task) -> Result:
+    """Retrieve L2 address info"""
 
     #use napalm to retrieve mac address table
     task.run(
         task=napalm_get,
-        getters=["get_mac_address_table","get_interfaces_ip"]
+        getters=["get_mac_address_table"]
     )
     return Result(
         host=task.host,
-        #this sets the task result to the host mac address
-        result=''#task.host.data['mac_address']
+        result=f"{task.host} done."
     )
 
-def run_code():
-    #get mac address from user
-    mac_address = input("Enter the MAC you are looking for: ")
 
-    #get credentials
+def setup_creds() -> dict:
+    """retrieve credentials"""
+
+    # get credentials
     creds = yaml.safe_load(open('C:\\Users\\Ben\\python\\creds.yaml'))
-    username = creds['user']['username']
-    password = creds['user']['password']
 
-    #update and filter inventory
-    nr = InitNornir(config_file="config.yaml")
-    nr.inventory.groups["cisco_group"].username = username
-    nr.inventory.groups["cisco_group"].password = password
-    switches = nr.filter(filter_func=lambda h: "ASW" in h.name)
-
-    #start main task
-    result2 = switches.run(
-        task=mytask
-    )
-
-    # #this bit retrieves a mac from host data
-    # asw1_mt = result2["ASW1"][0]
-    # print(asw1_mt)
-    
-    for host in result2.keys():
-        for entry in result2[host][1].result['get_mac_address_table']:
-            if mac_address in entry['mac']:
-                print(f"{host}: {entry['mac']} - {entry['interface']} - vlan{entry['vlan']}")
-        
-
+    return {
+        'username': creds['user']['username'],
+        'password': creds['user']['password']
+    }
 
 
 def main():
-    run_code()
+    """Main function"""
+
+    #get mac address from user
+    mac_address = input("Enter the MAC you are looking for: ")
+
+    creds = setup_creds()
+
+    #update and filter inventory
+    nornir_obj = InitNornir(config_file="config.yaml")
+    nornir_obj.inventory.groups["cisco_group"].username = creds['username']
+    nornir_obj.inventory.groups["cisco_group"].password = creds['password']
+
+    #start main task
+    result = nornir_obj.run(
+        task=get_address_info
+    )
+
+    if len(result.keys()) > len(result.failed_hosts.keys()):
+        for host in result.keys():
+            for entry in result[host][1].result['get_mac_address_table']:
+                if mac_address in entry['mac']:
+                    print(f"{host}: {entry['mac']} - {entry['interface']} - vlan{entry['vlan']}")
+
 
 if __name__ == "__main__":
     main()
-
